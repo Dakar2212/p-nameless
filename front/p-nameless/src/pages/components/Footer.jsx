@@ -1,9 +1,9 @@
 function Footer() {
   return (
-    <footer className="bg-white">
+    <footer className="bg-blue-600">
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="lg:flex lg:items-start lg:gap-8">
-          <div className="text-teal-600">
+          <div className="text-white">
             <svg
               className="h-8"
               viewBox="0 0 28 24"
@@ -20,11 +20,11 @@ function Footer() {
           <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
             <div className="col-span-2">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-white">
                   Get the latest news!
                 </h2>
 
-                <p className="mt-4 text-gray-500">
+                <p className="mt-4 text-white">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse
                   non cupiditate quae nam molestias.
                 </p>
@@ -46,7 +46,7 @@ function Footer() {
                     className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
                   />
 
-                  <button className="mt-1 w-full bg-teal-500 px-6 py-3 text-sm font-bold tracking-wide text-white uppercase transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0">
+                  <button className="mt-1 w-full bg-white px-6 py-3 text-sm font-bold tracking-wide text-blue-600 uppercase transition-none hover:bg-sky-500 sm:mt-0 sm:w-auto sm:shrink-0">
                     Sign Up
                   </button>
                 </div>
