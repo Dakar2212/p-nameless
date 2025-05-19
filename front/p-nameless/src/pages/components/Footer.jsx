@@ -42,25 +42,25 @@ function Footer() {
                   <input
                     type="email"
                     id="UserEmail"
-                    placeholder="john@rhcp.com"
-                    className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
+                    placeholder="Ingresa tu correo"
+                    className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm placeholder-gray-300"
                   />
 
                   <button className="mt-1 w-full bg-white px-6 py-3 text-sm font-bold tracking-wide text-blue-600 uppercase transition-none hover:bg-sky-500 sm:mt-0 sm:w-auto sm:shrink-0">
-                    Sign Up
+                    Suscribete
                   </button>
                 </div>
               </form>
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900">Services</p>
+              <p className="font-medium text-white">Services</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     1on1 Coaching{" "}
@@ -70,7 +70,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Company Review{" "}
@@ -80,7 +80,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Accounts Review{" "}
@@ -90,7 +90,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     HR Consulting{" "}
@@ -100,7 +100,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     SEO Optimisation{" "}
@@ -110,13 +110,13 @@ function Footer() {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900">Company</p>
+              <p className="font-medium text-white">Company</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     About{" "}
@@ -126,7 +126,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Meet the Team{" "}
@@ -136,7 +136,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Accounts Review{" "}
@@ -146,13 +146,13 @@ function Footer() {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900">Helpful Links</p>
+              <p className="font-medium text-white">Helpful Links</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Contact{" "}
@@ -162,7 +162,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     FAQs{" "}
@@ -172,7 +172,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Live Chat{" "}
@@ -182,13 +182,13 @@ function Footer() {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900">Legal</p>
+              <p className="font-medium text-white">Legal</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Accessibility{" "}
@@ -198,7 +198,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Returns Policy{" "}
@@ -208,7 +208,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Refund Policy{" "}
@@ -218,7 +218,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     Hiring-3 Statistics
                   </a>
@@ -227,13 +227,13 @@ function Footer() {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="font-medium text-gray-900">Downloads</p>
+              <p className="font-medium text-white">Downloads</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     Marketing Calendar{" "}
@@ -243,7 +243,7 @@ function Footer() {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-gray-200 transition hover:opacity-75"
                   >
                     {" "}
                     SEO Infographics{" "}
@@ -258,7 +258,7 @@ function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-gray-200 transition hover:opacity-75"
                 >
                   <span className="sr-only">Facebook</span>
 
@@ -282,7 +282,7 @@ function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-gray-200 transition hover:opacity-75"
                 >
                   <span className="sr-only">Instagram</span>
 
@@ -306,7 +306,7 @@ function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-gray-200 transition hover:opacity-75"
                 >
                   <span className="sr-only">Twitter</span>
 
@@ -326,7 +326,7 @@ function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-gray-200 transition hover:opacity-75"
                 >
                   <span className="sr-only">GitHub</span>
 
@@ -350,7 +350,7 @@ function Footer() {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-gray-200 transition hover:opacity-75"
                 >
                   <span className="sr-only">Dribbble</span>
 
@@ -374,7 +374,7 @@ function Footer() {
 
         <div className="mt-8 border-t border-gray-100 pt-8">
           <div className="sm:flex sm:justify-between">
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-200">
               &copy; 2022. Company Name. All rights reserved.
             </p>
 
@@ -382,7 +382,7 @@ function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-gray-500 transition hover:opacity-75"
+                  className="text-gray-200 transition hover:opacity-75"
                 >
                   {" "}
                   Terms & Conditions{" "}
@@ -392,7 +392,7 @@ function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-gray-500 transition hover:opacity-75"
+                  className="text-gray-200 transition hover:opacity-75"
                 >
                   {" "}
                   Privacy Policy{" "}
@@ -402,7 +402,7 @@ function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-gray-500 transition hover:opacity-75"
+                  className="text-gray-200 transition hover:opacity-75"
                 >
                   {" "}
                   Cookies{" "}
