@@ -11,6 +11,8 @@ import ProfilePage from './pages/ProfilePage';   // <-- Importado
 import HomePage from './pages/HomePage'; // <-- Importado
 import FeaturesSection from './pages/components/FeaturesSection';
 import DashboardPageV2 from './pages/components/DashboardV2';
+import AdminPage from './pages/components/AdminPage';
+import PorteriaPage from './pages/components/PorteriaPage';
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
       <Route path="/home" element={<HomePage />} /> 
       <Route path="/login" element={<LoginPageV2 />} /> 
       <Route path="/dashboard" element={<DashboardPageV2 />} />
+      <Route path="/Admin" element={<AdminPage />} />
+      <Route path="/Porteria" element={<PorteriaPage />} />
       {/* Puedes añadir más rutas aquí */}
       </Routes>
     </Router>
