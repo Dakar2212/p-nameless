@@ -12,7 +12,8 @@ import HomePage from './pages/HomePage'; // <-- Importado
 import FeaturesSection from './pages/components/FeaturesSection';
 import DashboardPageV2 from './pages/components/DashboardV2';
 import AdminPage from './pages/components/AdminPage';
-import PorteriaPage from './pages/components/PorteriaPage';
+import PorteriaPage from './pages/components/PorteriaPage'; 
+import RegisterPage from './pages/RegisterPage';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route path="/dashboard" element={<DashboardPageV2 />} />
       <Route path="/Admin" element={<AdminPage />} />
       <Route path="/Porteria" element={<PorteriaPage />} />
+      <Route path="/Register" element={<RegisterPage />} />
       {/* Puedes añadir más rutas aquí */}
       </Routes>
     </Router>
