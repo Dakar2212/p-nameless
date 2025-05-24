@@ -13,6 +13,12 @@ import FeaturesSection from './pages/components/FeaturesSection';
 import DashboardPageV2 from './pages/components/DashboardV2';
 import AdminPage from './pages/components/AdminPage';
 import PorteriaPage from './pages/components/PorteriaPage';
+import GestionResidentesPage from './pages/admin/GestionResidentesPage';
+import ComunicadosAvisosPage from './pages/admin/ComunicadosAvisosPage';
+import ReservaAreasPage from './pages/admin/ReservaAreasPage';
+import GestionPagosPage from './pages/admin/GestionPagosPage';
+import SolicitudesMantenimientoPage from './pages/admin/SolicitudesMantenimientoPage';
+import NormativasDocumentosPage from './pages/admin/NormativasDocumentosPage';
 
 
 function App() {
@@ -29,7 +35,12 @@ function App() {
       <Route path="/dashboard" element={<DashboardPageV2 />} />
       <Route path="/Admin" element={<AdminPage />} />
       <Route path="/Porteria" element={<PorteriaPage />} />
-      {/* Puedes añadir más rutas aquí */}
+      <Route path="/admin/gestion-residentes" element={<GestionResidentesPage />} />
+      <Route path="/admin/comunicados-avisos" element={<ComunicadosAvisosPage />} />
+      <Route path="/admin/reserva-areas" element={<ReservaAreasPage />} />
+      <Route path="/admin/gestion-pagos" element={<GestionPagosPage />} />
+      <Route path="/admin/solicitudes-mantenimiento" element={<SolicitudesMantenimientoPage />} />
+      <Route path="/admin/normativas-documentos" element={<NormativasDocumentosPage />} />
       </Routes>
     </Router>
   );
