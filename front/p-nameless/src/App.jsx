@@ -19,6 +19,12 @@ import ReservaAreasPage from './pages/admin/ReservaAreasPage';
 import GestionPagosPage from './pages/admin/GestionPagosPage';
 import SolicitudesMantenimientoPage from './pages/admin/SolicitudesMantenimientoPage';
 import NormativasDocumentosPage from './pages/admin/NormativasDocumentosPage';
+import RegistroVisitantesPage from './pages/porteria/RegistroVisitantesPage';
+import RecepcionPaqueteriaPage from './pages/porteria/RecepcionPaqueteriaPage';
+import ReporteIncidentesPage from './pages/porteria/ReporteIncidentesPage';
+import BitacoraRecorridosPage from './pages/porteria/BitacoraRecorridosPage';
+import ContactosEmergenciaPage from './pages/porteria/ContactosEmergenciaPage';
+
 
 
 function App() {
@@ -41,6 +47,11 @@ function App() {
       <Route path="/admin/gestion-pagos" element={<GestionPagosPage />} />
       <Route path="/admin/solicitudes-mantenimiento" element={<SolicitudesMantenimientoPage />} />
       <Route path="/admin/normativas-documentos" element={<NormativasDocumentosPage />} />
+      <Route path="/porteria/registro-visitantes" element={<RegistroVisitantesPage />} />
+      <Route path="/porteria/recepcion-paqueteria" element={<RecepcionPaqueteriaPage />} />
+      <Route path="/porteria/reporte-incidentes" element={<ReporteIncidentesPage />} />
+      <Route path="/porteria/bitacora-recorridos" element={<BitacoraRecorridosPage />} />
+      <Route path="/porteria/contactos-emergencia" element={<ContactosEmergenciaPage />} />
       </Routes>
     </Router>
   );
