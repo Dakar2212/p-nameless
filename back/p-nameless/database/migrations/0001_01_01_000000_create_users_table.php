@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('rol', ['superadministrador','administrador','usuario','portero'])->default('usuario');
             $table->string('documento_identidad')->unique();
             $table->string('telefono')->nullable();
             $table->string('foto_perfil')->nullable();

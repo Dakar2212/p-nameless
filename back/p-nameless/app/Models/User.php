@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Contracts\JWTSubject as JWTSubjectContract;
 use Laravel\Sanctum\HasApiTokens;
+Use App\Models\Role;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -26,8 +27,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'documento_identidad',
         'telefono',
-        //'foto_perfil',
-        'rol',
+        'foto_perfil',
     ];
     public function getJWTIdentifier()
     {
@@ -60,5 +60,72 @@ class User extends Authenticatable implements JWTSubject
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Helper para verificar si el usuario tiene un rol específico (por slug o nombre).
+     *
+     * @param string $roleIdentifier El slug o nombre del rol.
+     * @return bool
+     */
+    public function hasRole(string $roleIdentifier): bool
+    {
+        foreach (this->roles as $role) {
+            if ($role->name === $roleIdentifier || $role->slug === $roleIdentifier) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * Helper para asignar un rol al usuario.
+     *
+     * @param string|int|Role $role El slug, ID o instancia del modelo Role.
+     */
+    public function assignRole($role): void
+    {
+        if (is_string($role)) {
+            // Busca por slug primero, luego por nombre
+            $roleModel = Role::where('slug', $role)->orWhere('name', $role)->first();
+        } elseif (is_int($role)) {
+            $roleModel = Role::find($role);
+        } elseif ($role instanceof Role) {
+            $roleModel = $role;
+        } else {
+            // Tipo no soportado o rol inválido
+            return;
+        }
+
+        if ($roleModel && !$this->hasRole($roleModel->slug)) { // Verifica usando el slug (o name) del modelo encontrado
+            $this->roles()->attach($roleModel->id);
+        }
+    }
+
+    /**
+     * Helper para remover un rol del usuario.
+     *
+     * @param string|int|Role $role El slug, nombre, ID o instancia del modelo Role.
+     * @return void
+     */
+    public function removeRole($role): void
+    {
+        if (is_string($role)) {
+            $roleModel = Role::where('slug', $role)->orWhere('name', $role)->first();
+        } elseif (is_int($role)) {
+            $roleModel = Role::find($role);
+        } elseif ($role instanceof Role) {
+            $roleModel = $role;
+        } else {
+            return;
+        }
+
+        if ($roleModel) {
+            $this->roles()->detach($roleModel->id);
+        }
     }
 }

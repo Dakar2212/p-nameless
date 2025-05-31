@@ -1,6 +1,7 @@
 // src/pages/LoginPageV2.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import useAuthStore from '../stores/authStore';
 // Importa íconos necesarios
 import { UserIcon, LockClosedIcon, PlayCircleIcon, ArrowRightIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline'; 
 
@@ -19,26 +20,30 @@ function WhatsAppIcon() {
 }
 
 function LoginPageV2() {
-  const [role, setRole] = useState('propietario'); // 'propietario' o 'admin'
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
   const navigate = useNavigate();
 
-  const handleLogin = (event) => {
+  const login = useAuthStore(state => state.login);
+  const isLoading = useAuthStore(state => state.isLoading);
+  const authError = useAuthStore(state => state.error);
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard'); // Redirige al dashboard si ya está autenticado
+    }
+  }, [isAuthenticated, navigate]);
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    // Aquí va la lógica para llamar a tu API de login /api/auth/login
-    console.log('Intentando iniciar sesión como:', role);
-    console.log('Usuario:', username);
-    console.log('Contraseña:', password);
-    // Ejemplo: si el login es exitoso, redirige al dashboard
-    // const loginExitoso = true; // Simulación
-    // if (loginExitoso) {
-    //   navigate('/dashboard');
-    // } else {
-    //   alert('Usuario o contraseña incorrectos');
-    // }
-    alert('Login simulado'); // Simulación por ahora
-  };
+    try {
+      await login(email, password);
+    } catch (error) {
+      console.error("Intento de login desde desde el componente: ", error.message)
+    }
+  }
 
   return (
     <div 
@@ -59,30 +64,7 @@ function LoginPageV2() {
         </div>
 
         {/* Selector de Rol/Tabs */}
-        <div className="flex justify-center mb-5">
-          <button
-            type="button"
-            onClick={() => setRole('propietario')}
-            className={`py-2 px-5 rounded-l-md text-sm font-medium transition duration-300 ${
-              role === 'propietario' 
-                ? 'bg-blue-700 text-white shadow-md' 
-                : 'bg-blue-300 text-blue-800 hover:bg-blue-400'
-            }`}
-          >
-            Propietario/Comite
-          </button>
-          <button
-            type="button"
-            onClick={() => setRole('admin')}
-            className={`py-2 px-5 rounded-r-md text-sm font-medium transition duration-300 ${
-              role === 'admin' 
-                ? 'bg-blue-700 text-white shadow-md' 
-                : 'bg-blue-300 text-blue-800 hover:bg-blue-400'
-            }`}
-          >
-            Admin/Ejecutivo
-          </button>
-        </div>
+        
 
         {/* Títulos del Formulario */}
         <h2 className="text-xl font-semibold text-gray-700 mb-1">Inicio de Sesión</h2>
@@ -93,9 +75,10 @@ function LoginPageV2() {
           <div className="mb-4">
             <input
               type="text" // Cambiar a 'email' o 'text' según lo que espere tu API
-              placeholder="Usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Correo Electrónico"
+              autoComplete='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-3 rounded-lg border border-gray-300 bg-white bg-opacity-90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
               required
             />
@@ -110,6 +93,7 @@ function LoginPageV2() {
             <input
               type="password"
               placeholder="Contraseña"
+              autoComplete='current-password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-3 rounded-lg border border-gray-300 bg-white bg-opacity-90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"

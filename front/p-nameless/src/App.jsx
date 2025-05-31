@@ -1,9 +1,9 @@
 // src/App.jsx
-import React from 'react'; // Es buena práctica importar React aunque no se use explícitamente con Vite/JSX moderno
+import React, { useEffect } from 'react'; // Es buena práctica importar React aunque no se use explícitamente con Vite/JSX moderno
 // import reactLogo from './assets/react.svg' // No usado
 // import viteLogo from '/vite.svg' // No usado
 import './App.css'; // Asegúrate que aquí O en index.css (importado en main.jsx) estén tus directivas @tailwind
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom'; 
 import LoginPage from './pages/LoginPage';
 import LoginPageV2 from './pages/LoginPageV2';
 import DashboardPage from './pages/DashboardPage'; // <-- Importado
@@ -28,10 +28,17 @@ import ContactosEmergenciaPage from './pages/porteria/ContactosEmergenciaPage';
 
 
 function App() {
+  const checkAuth = useAuthStore(state => state.checkAuth);
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+
+  useEffect(() => {
+    // Verifica la autenticación al cargar la aplicación
+    checkAuth();
+  }, [checkAuth]);
+
   return (
-    // Usas <Router> porque lo definiste como alias de BrowserRouter
-    //<Route path="/login" element={<LoginPage />} />
     <Router> 
+      <AuthRedirector /> {/* Componente para manejar redirecciones post-login */}
       <Routes>
       <Route path="*" element={<Navigate to="/home" replace />} /> 
       

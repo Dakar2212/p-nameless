@@ -44,7 +44,8 @@ function LoggedInNavbar() {
     setUserDropdownOpen(false); // Cierra el de usuario si está abierto
   };
 
-  const handleLogout = () => {
+  const handleLogoutClick = async () => {
+    await logout(); // Llama a la función de logout del store 
     console.log('Cerrando sesión...');
     setUserDropdownOpen(false);
     navigate('/login');
@@ -190,6 +191,7 @@ function LoggedInNavbar() {
           </div>
         </div>
       </div>
+      
     </nav>
   );
 }
