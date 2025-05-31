@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -21,10 +22,14 @@ class AuthController extends Controller
             'password'            => 'required|string|confirmed|min:8',
             'documento_identidad' => 'required|string|unique:users,documento_identidad',
             'telefono'            => 'nullable|string|max:15',
-            'foto_perfil'         => 'nullable|string|max:255',
-            'rol'                 => 'required|string|in:superadministrador,administrador,usuario,portero',
+            'foto_perfil'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            //'rol'                 => 'required|string|in:superadministrador,administrador,usuario,portero',
         ]);
 
+        $pathFotoPerfil = null;
+        if ($req->hasFile('foto_perfil') && $req->file('foto_perfil')->isValid()) {
+            $pathFotoPerfil = $req->file('foto_perfil')->store('fotos_perfil', 'public');
+        }
 
         $user = User::create([
             'name'               => $data['name'],
@@ -32,9 +37,11 @@ class AuthController extends Controller
             'password'             => Hash::make($data['password']),
             'documento_identidad'  => $data['documento_identidad'],
             'telefono'             => $data['telefono'] ?? null,
-            'foto_perfil'          => $data['foto_perfil'] ?? null,
-            'rol'                  => $data['rol'],
+            'foto_perfil'          => $pathFotoPerfil, // Cambia esto según tu lógica de roles
+
         ]);
+
+        $user->assignRole('usuario'); // Asigna el rol por defecto al usuario
 
         $token = JWTAuth::fromUser($user);
 

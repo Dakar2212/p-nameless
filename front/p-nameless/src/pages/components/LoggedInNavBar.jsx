@@ -2,11 +2,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // Importa íconos (ajusta según necesites)
-import { UserCircleIcon, ArrowLeftOnRectangleIcon, UserIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { UserCircleIcon, ArrowLeftOnRectangleIcon, UserIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'; 
+import useAuthStore from '../../stores/authStore'; 
+
+
 
 function LoggedInNavbar() {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const { logout } = useAuthStore(); // Asegúrate de que tu store tenga una función logout
   const navigate = useNavigate();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null); // Ref para detectar clicks fuera
 
   // Lógica para cerrar el dropdown si se hace clic fuera
@@ -29,13 +33,11 @@ function LoggedInNavbar() {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  const handleLogout = () => {
+  const handleLogoutClick = async () => {
+    await logout(); // Llama a la función de logout del store 
     console.log('Cerrando sesión...');
     setDropdownOpen(false); // Cierra el dropdown
-    // Aquí va la lógica real de logout:
-    // - Limpiar token JWT (de localStorage, state global, etc.)
-    // - Redirigir a la página de login
-    navigate('/login'); // O la ruta de tu login
+    navigate('/'); // O la ruta de tu login
   };
 
   return (
@@ -112,7 +114,7 @@ function LoggedInNavbar() {
 
               {/* Botón de Cerrar Sesión */}
               <button
-                onClick={handleLogout}
+                onClick={handleLogoutClick}
                 className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
                 tabIndex="-1"
