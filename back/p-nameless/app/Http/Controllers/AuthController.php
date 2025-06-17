@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use App\Models\Role;
 
@@ -31,22 +32,32 @@ class AuthController extends Controller
             $pathFotoPerfil = $req->file('foto_perfil')->store('fotos_perfil', 'public');
         }
 
-        $user = User::create([
-            'name'               => $data['name'],
-            'email'                => $data['email'],
-            'password'             => Hash::make($data['password']),
-            'documento_identidad'  => $data['documento_identidad'],
-            'telefono'             => $data['telefono'] ?? null,
-            'foto_perfil'          => $pathFotoPerfil, // Cambia esto según tu lógica de roles
+        $user = null;
+        $token = null;
 
-        ]);
 
-        $user->assignRole('usuario'); // Asigna el rol por defecto al usuario
+       DB::transaction(function () use ($data, $pathFotoPerfil, &$user, &$token) {
+            // Crea el usuario
+            $user = User::create([
+                'name'                  => $data['name'],
+                'email'                 => $data['email'],
+                'password'              => Hash::make($data['password']),
+                'documento_identidad'   => $data['documento_identidad'],
+                'telefono'              => $data['telefono'] ?? null,
+                'foto_perfil'           => $pathFotoPerfil,
+            ]);
 
-        $token = JWTAuth::fromUser($user);
+            // Asigna el rol
+            // Si aquí ocurre el error, la creación del usuario se deshará (rollback).
+            $user->assignRole('propietario');
+
+            // Genera el token DENTRO de la transacción si todo fue bien
+            $token = JWTAuth::fromUser($user);
+        }); // Asigna el rol por defecto al usuario
 
         return response()->json([
-            'user'         => $user,
+            'message'      => 'Usuario registrado exitosamente!',
+            'user'         => $user->load('roles'),
             'access_token' => $token,
             'token_type'   => 'bearer',
             'expires_in'   => auth('api')->factory()->getTTL() * 60,
@@ -54,7 +65,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Autenticar usuario y devolver token.
+     * Autenticar usua rio y devolver token.
      */
     public function login(Request $req)
     {

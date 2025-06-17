@@ -18,6 +18,14 @@ class RoleSeeder extends Seeder
         //Role::create(['name' => 'Residente', 'slug' => 'residente', 'description' => 'Habitante de una unidad residencial']);
 
         Role::firstOrCreate(
+            ['slug' => 'super-admin'], // Atributos para buscar
+            [ // Atributos para crear/actualizar si no se encuentra o si usas updateOrCreate
+                'name' => 'Super Administrador',
+                'description' => 'Acceso total al sistema, incluyendo gestión de roles y permisos'
+            ]
+        );
+
+        Role::firstOrCreate(
             ['slug' => 'admin'], // Atributos para buscar
             [ // Atributos para crear/actualizar si no se encuentra o si usas updateOrCreate
                 'name' => 'Administrador',
@@ -38,6 +46,14 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'Residente',
                 'description' => 'Habitante de una unidad residencial'
+            ]
+        );
+
+        Role::firstOrCreate(
+            ['slug' => 'portero'],
+            [
+                'name' => 'Portero',
+                'description' => 'Encargado de la seguridad y mantenimiento de la unidad residencial'
             ]
         );
 

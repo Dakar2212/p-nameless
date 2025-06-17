@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // Importa íconos necesarios
 import { ArrowRightIcon, BuildingOfficeIcon, UserIcon, EnvelopeIcon, LockClosedIcon, IdentificationIcon, PhoneIcon, PhotoIcon } from '@heroicons/react/24/outline';
+import useAuthStore from '../stores/authStore'; // Asegúrate de que la ruta sea correcta
 
 // URL de la imagen de fondo (ajústala a tu ruta real en /public)
 const backgroundImageUrl = '/images/background-houses.jpg';
@@ -30,12 +31,17 @@ function RegisterPage() { // Cambiado el nombre de la función
   });
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+ 
   const navigate = useNavigate();
 
+  const registerAction = useAuthStore(state => state.register);
+  const isLoading = useAuthStore(state => state.isLoading);
+
+
+  
   const handleChange = (e) => {
     if (e.target.name === 'foto_perfil') {
-      setFormData({ ...formData, foto_perfil: e.target.files[0] }); // Guarda el objeto File
+      setFormData({ ...formData, foto_perfil: e.target.files[0] });
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
@@ -43,17 +49,16 @@ function RegisterPage() { // Cambiado el nombre de la función
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
+
+    // Usamos los nombres de las funciones de estado que sí existen: setError y setSuccessMessage
     setError(null);
     setSuccessMessage('');
 
     if (formData.password !== formData.password_confirmation) {
       setError('Las contraseñas no coinciden.');
-      setIsLoading(false);
       return;
     }
 
-    // Crear FormData para enviar archivos y otros datos
     const dataToSend = new FormData();
     dataToSend.append('name', formData.name);
     dataToSend.append('email', formData.email);
@@ -64,46 +69,21 @@ function RegisterPage() { // Cambiado el nombre de la función
     if (formData.foto_perfil) {
       dataToSend.append('foto_perfil', formData.foto_perfil);
     }
-    // El rol se asignará en el backend por defecto o por un admin
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/auth/register', {
-        method: 'POST',
-        headers: {
-          // 'Content-Type': 'multipart/form-data' // No es necesario, el navegador la pone con FormData
-          'Accept': 'application/json',
-        },
-        body: dataToSend, // Enviar FormData
-      });
+      const responseData = await registerAction(dataToSend);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        let errorMessage = data.message || 'Ocurrió un error en el registro.';
-        if (data.errors) {
-          const errorsArray = Object.values(data.errors).flat();
-          errorMessage = errorsArray.join(' ');
-        }
-        throw new Error(errorMessage);
-      }
-
-      setSuccessMessage('¡Registro exitoso! Revisa tu correo para verificar o espera aprobación.');
-      setFormData({ // Limpiar formulario
+      setSuccessMessage(responseData.message || '¡Registro exitoso!');
+      setFormData({ 
           name: '', email: '', password: '', password_confirmation: '',
           documento_identidad: '', telefono: '', foto_perfil: null,
       });
-      // Podrías redirigir al login o mostrar un mensaje para que espere aprobación
-      // setTimeout(() => {
-      //   navigate('/login');
-      // }, 3000);
 
     } catch (error) {
-      console.error('Error en el registro:', error);
+      // Usamos setError para mostrar el error que viene del store.
       setError(error.message || 'No se pudo conectar con el servidor.');
-    } finally {
-      setIsLoading(false);
     }
-  };
+};
 
   return (
     <div 

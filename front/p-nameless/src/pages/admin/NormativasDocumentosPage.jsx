@@ -1,6 +1,6 @@
 // src/pages/admin/NormativasDocumentosPagina.jsx
 import React from 'react';
-import AdminBarTemporal from '../components/AdminBarTemporal'; // ¡VERIFICA ESTA RUTA!
+import AdminBarTemporal from '../components/AdminBarPage'; // ¡VERIFICA ESTA RUTA!
 
 function NormativasDocumentosPagina() {
   return (

@@ -85,14 +85,23 @@ const useAuthStore = create(
           }
 
           // Registro exitoso
-          set({ isLoading: false, error: null });
-          // Opcional: Si tu API de registro devuelve un token y datos de usuario para auto-login:
-          // set({ token: data.access_token, user: data.user, isAuthenticated: true, isLoading: false });
-          // localStorage.setItem('authToken', data.access_token);
-          // localStorage.setItem('authUser', JSON.stringify(data.user));
+          set({
+            token: data.access_token,
+            user: data.user,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
+
           return data; // Devuelve los datos para un mensaje de éxito, etc.
         } catch (error) {
-          set({ error: error.message, isLoading: false });
+          set({
+            error: error.message,
+            isLoading: false,
+            isAuthenticated: false,
+            user: null,
+            token: null
+            });
           throw error;
         }
       },

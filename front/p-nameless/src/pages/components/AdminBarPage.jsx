@@ -13,7 +13,7 @@ import {
   XMarkIcon // Para el botón de cerrar el sidebar
 } from '@heroicons/react/24/outline';
 
-function LoggedInNavbar() {
+function AdminBarPage() {
   const [isUserDropdownOpen, setUserDropdownOpen] = useState(false);
   const [isNotificationsOpen, setNotificationsOpen] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Estado para el panel lateral
@@ -200,4 +200,4 @@ function LoggedInNavbar() {
   );
 }
 
-export default LoggedInNavbar;
+export default AdminBarPage;

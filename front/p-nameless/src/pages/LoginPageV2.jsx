@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../stores/authStore';
+import { fetchUserProfile } from '../services/apiService';
 // Importa íconos necesarios
 import { UserIcon, LockClosedIcon, PlayCircleIcon, ArrowRightIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline'; 
 
@@ -74,7 +75,7 @@ function LoginPageV2() {
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <input
-              type="text" // Cambiar a 'email' o 'text' según lo que espere tu API
+              type="email" // Cambiar a 'email' o 'text' según lo que espere tu API
               placeholder="Correo Electrónico"
               autoComplete='email'
               value={email}
@@ -102,12 +103,34 @@ function LoginPageV2() {
              {/* Aquí podrías añadir un enlace de "¿Olvidaste tu contraseña?" */}
           </div>
 
+          {authError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+              <span className="block sm:inline">{authError}</span>
+            </div>
+          )}
+
           <button
             type="submit"
-            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition duration-300 shadow-md"
+            // --- 2. DESHABILITAR BOTÓN DURANTE LA CARGA ---
+            disabled={isLoading}
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition duration-300 shadow-md disabled:bg-blue-400 disabled:cursor-not-allowed"
           >
-            <span>Iniciar Sesion</span>
-            <ArrowRightIcon className="h-5 w-5"/>
+            {/* --- 3. MOSTRAR INDICADOR DE CARGA --- */}
+            {isLoading ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Ingresando...</span>
+              </>
+            ) : (
+              <>
+                <span>Iniciar Sesion</span>
+                <ArrowRightIcon className="h-5 w-5"/>
+              </>
+            )}
+            {/* ------------------------------------- */}
           </button>
         </form>
 
